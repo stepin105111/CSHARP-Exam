@@ -23,7 +23,7 @@ namespace Customer
     }
     interface ICustomerManager
     {
-        bool AddCustomer(Customer cm);
+        bool AddCustomer(Customer cr);
         bool DeleteCustomer(int id);
         bool UpdateCustomer(int id);
         bool ViewAllCustomer();
@@ -31,18 +31,18 @@ namespace Customer
     class CustomerManager : ICustomerManager
     {
         HashSet<Customer> customers = new HashSet<Customer>();
-        public bool AddCustomer(Customer cm)
+        public bool AddCustomer(Customer cr)
         {
-            return customers.Add(cm);
+            return customers.Add(cr);
         }
 
         public bool DeleteCustomer(int id)
         {
-            foreach (Customer cm in customers)
+            foreach (Customer cr in customers)
             {
-                if (cm.CustomerID == id)
+                if (cr.CustomerID == id)
                 {
-                    customers.Remove(cm);
+                    customers.Remove(cr);
                     return true;
                 }
             }
@@ -50,9 +50,9 @@ namespace Customer
         }
         public bool UpdateCustomer(int id)
         {
-            foreach (Customer cm in customers)
+            foreach (Customer cr in customers)
             {
-                if (cm.CustomerID == id)
+                if (cr.CustomerID == id)
                 {
                     Console.Write("Enter the New Name: ");
                     string newname = Console.ReadLine();
@@ -60,9 +60,9 @@ namespace Customer
                     string newaddress = Console.ReadLine();
                     Console.Write("Enter the New Salary: ");
                     double newsalary = double.Parse(Console.ReadLine());
-                    cm.Name = newname;
-                    cm.Address = newaddress;
-                    cm.Salary = newsalary;
+                    cr.Name = newname;
+                    cr.Address = newaddress;
+                    cr.Salary = newsalary;
                     return true;
                 }
             }
@@ -70,13 +70,13 @@ namespace Customer
         }
         public bool ViewAllCustomer()
         {
-            foreach (var cm in customers)
+            foreach (var cr in customers)
             {
                 Console.WriteLine("-------------------------------");
-                Console.WriteLine($"ID: {cm.CustomerID}");
-                Console.WriteLine($"Name: {cm.Name}");
-                Console.WriteLine($"Address: {cm.Address}");
-                Console.WriteLine($"Author: {cm.Salary}");
+                Console.WriteLine($"ID: {cr.CustomerID}");
+                Console.WriteLine($"Name: {cr.Name}");
+                Console.WriteLine($"Address: {cr.Address}");
+                Console.WriteLine($"Author: {cr.Salary}");
                 Console.WriteLine("-------------------------------");
             }
             return true;
@@ -87,16 +87,18 @@ namespace Customer
     {
         static void Main(string[] args)
         {
-            Customer c1 = new Customer(10, "Pradeep", "Mysore", 45000);
-            Customer c2 = new Customer(20, "CVP", "Bangalore", 15000);
-            Customer c3 = new Customer(30, "Arun", "Chennai", 90000);
+            Customer c1 = new Customer(13, "Aneena Fernandez", "Trivadrum", 33000);
+            Customer c2 = new Customer(14, "Anagha Suresh", "Kannur", 25000);
+            Customer c3 = new Customer(30, "Athira Murali", "Thrissur", 30000);
+            Customer c4 = new Customer(40, "Binitta Micheal", "Trivandrum", 25000);
             CustomerManager mgr = new CustomerManager();
             mgr.AddCustomer(c1);
             mgr.AddCustomer(c2);
             mgr.AddCustomer(c3);
-            
+            mgr.AddCustomer(c4);
+
             mgr.ViewAllCustomer();
-            mgr.DeleteCustomer(20);
+            mgr.DeleteCustomer(14);
             mgr.ViewAllCustomer();
         }
 
